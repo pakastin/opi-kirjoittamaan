@@ -20,9 +20,15 @@
         text-align: center;   
       }
       .line {
+        font-size: 1.25rem;
+        font-weight: 500;
         padding: .75rem 0;
       }
       input {
+        font: inherit;
+        padding: .75rem;
+      }
+      button {
         font: inherit;
         padding: .75rem;
       }
@@ -32,32 +38,32 @@
     <div class="wrapper">
       <div>
         <div class="line"></div>
-        <input autofocus>
+        <form>
+          <input>
+          <button>Puhu!</button>
+        </form>
       </div>
     </div>
     <script>
       var input = document.querySelector('input');
       var line = document.querySelector('.line');
-      var msg = new SpeechSynthesisUtterance();
-      var timeout;
-
-      msg.lang = 'fi-FI';
+      var form = document.querySelector('form');
 
       input.oninput = function () {
         line.textContent = input.value.toUpperCase();
+      };
 
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-          speak(input.value);
-        }, 1000);
-      }
-
-      function speak (line) {
+      form.onsubmit = function (e) {
+        e.preventDefault();
+      
         speechSynthesis.cancel();
 
-        msg.text = line;
+        var msg = new SpeechSynthesisUtterance();
+
+        msg.lang = 'fi-FI';
+        msg.text = input.value;
 
         speechSynthesis.speak(msg);
-      }
+      };
     </script>
 </html>
