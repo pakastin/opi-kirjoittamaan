@@ -38,15 +38,35 @@
     <div class="wrapper">
       <div>
         <div class="line"></div>
-        <input>
+        <form>
+          <input>
+          <button>Puhu!</button>
+        </form>
       </div>
     </div>
     <script>
+      var form = document.querySelector('form');
       var input = document.querySelector('input');
       var line = document.querySelector('.line');
+      var lastChar;
+
+      input.onkeypress = function (e) {
+        if (e.key) {
+          var msg = new SpeechSynthesisUtterance();
+
+          msg.lang = 'fi-FI';
+          msg.text = e.key;
+
+          speechSynthesis.speak(msg);
+        }
+      };
 
       input.oninput = function () {
         line.textContent = input.value.toUpperCase();
+      };
+
+      form.onsubmit = function (e) {
+        e.preventDefault();
 
         speechSynthesis.cancel();
 
