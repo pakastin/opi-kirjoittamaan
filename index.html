@@ -47,7 +47,7 @@
         line.textContent = input.value.toUpperCase();
 
         clearTimeout(timeout);
-        setTimeout(function () {
+        timeout = setTimeout(function () {
           speak(input.value);
         }, 1000);
       }
