@@ -38,24 +38,16 @@
     <div class="wrapper">
       <div>
         <div class="line"></div>
-        <form>
-          <input>
-          <button>Puhu!</button>
-        </form>
+        <input>
       </div>
     </div>
     <script>
       var input = document.querySelector('input');
       var line = document.querySelector('.line');
-      var form = document.querySelector('form');
 
       input.oninput = function () {
         line.textContent = input.value.toUpperCase();
-      };
 
-      form.onsubmit = function (e) {
-        e.preventDefault();
-      
         speechSynthesis.cancel();
 
         var msg = new SpeechSynthesisUtterance();
@@ -64,8 +56,6 @@
         msg.text = input.value;
 
         speechSynthesis.speak(msg);
-      
-        input.focus();
       };
     </script>
 </html>
