@@ -56,7 +56,7 @@
 
           msg.lang = 'fi-FI';
           msg.text = e.key;
-          msg.voice = getVoice('fi-FI');
+          msg.voice = getVoice('fi-FI', 'fi');
 
           speechSynthesis.speak(msg);
         }
@@ -75,14 +75,14 @@
 
         msg.lang = 'fi-FI';
         msg.text = input.value;
-        msg.voice = getVoice('fi-FI');
+        msg.voice = getVoice('fi-FI', 'fi');
 
         speechSynthesis.speak(msg);
       };
 
       var voicesByLang = {};
 
-      function getVoice (lang) {
+      function getVoice (lang, lang2) {
         var voice = voicesByLang[lang];
         if (voice) {
           return voice;
@@ -92,7 +92,7 @@
         voice = voices[0];
 
         for (var i = 0; i < voices.length; i++) {
-          if (voices[i].lang === lang) {
+          if (voices[i].lang === lang || voices[i].lang === lang2) {
             voice = voices[i];
             break;
           }
