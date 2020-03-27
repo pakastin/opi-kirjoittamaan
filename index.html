@@ -56,6 +56,7 @@
 
           msg.lang = 'fi-FI';
           msg.text = e.key;
+          msg.voice = getVoice('fi-FI');
 
           speechSynthesis.speak(msg);
         }
@@ -74,8 +75,30 @@
 
         msg.lang = 'fi-FI';
         msg.text = input.value;
+        msg.voice = getVoice('fi-FI');
 
         speechSynthesis.speak(msg);
       };
+
+      var voicesByLang = {};
+
+      function getVoice (lang) {
+        var voice = voicesByLang[lang];
+        if (voice) {
+          return voice;
+        }
+        var voices = speechSynthesis.getVoices();
+
+        voice = voices[0];
+
+        for (var i = 0; i < voices.length; i++) {
+          if (voices[i].lang === lang) {
+            voice = voices[i];
+            break;
+          }
+        }
+
+        return voice;
+      }
     </script>
 </html>
